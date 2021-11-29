@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>BoxOffice | {{show.movie.movie_name}} </title>
+
+
+{% endblock %}
+
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static "styles/seat.css" %}">
+<!--<style>-->
+<!--  .hall__screen {-->
+<!--    background-image: url({{show.movie.movie_poster.url}});-->
+<!--  }-->
+<!--</style>-->
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 hall" style="background: linear-gradient(360deg, black, #1f1f1f);">
+      <form action="{% url 'booked' %}" method="POST" id="book">
+        {% csrf_token %}
+        <input type="hidden" value="{{show.shows}}" name="show" readonly>
+        <h3 style="color:white">Booked Seats:</h3>
+        <p style="color:white">
+        {% for seat in seat %}
+            {{seat.useat}}
+        {% endfor %}
+        </p>
+        <input type="text" name="SeatNo.">
+      </form>
+    </div>
+  </div>
+</div>
+
+<img src= {% static "images/seats2.png" %} width="1500" height="600">
+  <div class="row bottom">
+    <div class="col-9">
+      <h1 class="text-white">Selected Seats : <span id="slots"></span></h1>
+    </div>
+    <div class="col-3">
+      {% if user.is_authenticated %}
+      <button type="submit" form="book" class="btn btn-lg btn-block btn-primary"> Confirm Booking </button>
+      {% else %}
+      <a href="/accounts/login" class="btn btn-lg btn-block btn-danger"> Login To Book </a>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

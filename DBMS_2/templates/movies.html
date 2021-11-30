@@ -105,14 +105,14 @@
 
                 </div>
 
-                <div class="modal fade" id="trailer" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <iframe width="800px" height="500px" src="{{movies.movie_trailer}}"
-                                allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="modal fade" id="trailer" tabindex="-1">-->
+<!--                    <div class="modal-dialog modal-lg">-->
+<!--                        <div class="modal-content">-->
+<!--                            <iframe width="800px" height="500px" src="{{movies.movie_trailer}}"-->
+<!--                                allowfullscreen></iframe>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
                 <!-- Modal for time selection-->
@@ -121,33 +121,33 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title"> Select cinema and timings </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+<!--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                    <span aria-hidden="true">&times;</span>-->
+<!--                                </button>-->
                             </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
+<!--                            <div class="modal-body">-->
+<!--                                <div class="container-fluid">-->
 
 
-                                    {% for i in cin %}
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h3>{{i.cinema_name}}</h3>
-                                        </div>
-                                        <div class="col-12 mb-4">
-                                            {% for j in i.cinema_show.all %}
-                                            {% if j.movie_id == movies.movie %}
-                                            <h5 class="time"><a href="/seat/{{j.shows}}"
-                                                    class="badge badge-primary">{{j.time}}</a></h5>
-                                            {% endif %}
-                                            {% endfor %}
-                                        </div>  
-                                    </div>
-                                    {% endfor %}
+<!--                                    {% for i in cin %}-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-12">-->
+<!--                                            <h3>{{i.cinema_name}}</h3>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-12 mb-4">-->
+<!--                                            {% for j in i.cinema_show.all %}-->
+<!--                                            {% if j.movie_id == movies.movie %}-->
+<!--                                            <h5 class="time"><a href="/seat/{{j.shows}}"-->
+<!--                                                    class="badge badge-primary">{{j.time}}</a></h5>-->
+<!--                                            {% endif %}-->
+<!--                                            {% endfor %}-->
+<!--                                        </div>  -->
+<!--                                    </div>-->
+<!--                                    {% endfor %}-->
 
-                                    
-                                </div>
-                            </div>
+<!--                                    -->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                     </div>
 

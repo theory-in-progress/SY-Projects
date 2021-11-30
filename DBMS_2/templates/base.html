@@ -1,62 +1,159 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% block title%}{% endblock %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% block style %}{% endblock %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
 
-</head>
-  <body align="center">
-      
-    <nav class="navbar sticky-top" style="background-color: #0000006b">
-        <div class="col-lg-3 col-md-4 col-8">
-            <h2 class="text-white"> <a role="button" href={% url 'index' %} style="text-decoration: none; color: white;" ><i class="fa fa-video-camera"></i> BoxOffice</a></h2>
-        </div>
-        {% if user.is_authenticated %}
-        <div class="col-lg-3 col-4">
-                <div class="dropdown">
-                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-user" aria-hidden="true"></i> {{user.first_name }}
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            {% if user.cinema.role == 'cinema_manager' %}
-                            <a class="dropdown-item" href="{% url 'dashboard' %}"> <i class="fa fa-edit"></i> Dashboard</a>
-                            {% else %}
-                            <a class="dropdown-item" href="{% url 'profile' %}"> <i class="fa fa-edit"></i> Profile</a>
-                            <a class="dropdown-item" href="{% url 'bookings' %}"> <i class="fa fa-ticket"></i> Bookings</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+
+
+<body>
+<div class="w3-top">
+    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+
+    <a href={% url 'index' %} class="w3-bar-item w3-button w3-padding-large w3-white">BoxOffice</a>
+
+    {% if user.is_authenticated %}
+<!--        <button class="w3-bar-item w3-button w3-padding-large w3-white">-->
+<!--            <div class="w3-bar-item w3-button w3-padding-large w3-white">-->
+                <button class="w3-button w3-black w3-padding-large w3-large w3-right">
+                  <i class="fa fa-user" aria-hidden="true"></i> {{user.first_name }}
+                </button>
+<!--            <div class="w3-bar-item w3-button w3-padding-large w3-white">-->
+                {% if user.cinema.role == 'cinema_manager' %}
+                    <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'dashboard' %}"> <i class="fa fa-edit"></i> Dashboard</a>
+                {% else %}
+                    <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'profile' %}"> <i class="fa fa-edit"></i> Profile</a>
+                    <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'bookings' %}"> <i class="fa fa-ticket"></i> Bookings</a>
+                {% endif %}
+            <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
                         </div>
                 </div>
         </div>
-        {%  else  %}
-        <div class="col-lg-3 col-12 mt-2">
-            <div class="row no-gutters">
-                <div class="col mr-1">
-                    <a class="btn btn-danger d-block" href="{% url 'register' %}" role="button"> Sign Up</a>
-                    <br>
-                    <a class="btn btn-danger d-block" href="{% url 'login' %}" role="button"> Sign In </a>
+    {%  else  %}
+        <div class="w3-top-right">
+            <div class="w3-bar w3-red w3-card w3-right w3-large">
+                <div class="w3-bar w3-red w3-card w3-right w3-large">
+
+                    <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-padding-large w3-white">Sign Up</a>
+
+                    <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large w3-white">Sign In</a>
+
                 </div>
             </div>
         </div>
-        {% endif %}
-    </nav>
+    {% endif %}
+
+
+
+
+    </div>
+
+<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo"></h1>
+</header>
+
+<div class="w3-row-padding w3-padding-20 w3-container">
+  <div class="w3-content">
+<!--    <div class="w3-twothird">-->
+
 
     {% block content %}
     {% endblock %}
 
 
-<!--     Optional JavaScript-->
-<!--     jQuery first, then Popper.js, then Bootstrap JS-->
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-
-
     {% block JQuery %}
     {% endblock %}
 
+    <div class="w3-third w3-center">
+<!--    </div>-->
+  </div>
+</div>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+<!--{% load static %}-->
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    {% block title%}{% endblock %}-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+<!--    {% block style %}{% endblock %}-->
+
+<!--</head>-->
+<!--  <body align="center">-->
+
+<!--    <nav class="navbar sticky-top" style="background-color: #0000006b">-->
+<!--        <div class="col-lg-3 col-md-4 col-8">-->
+<!--            <h2 class="text-white"> <a role="button" href={% url 'index' %} style="text-decoration: none; color: white;" ><i class="fa fa-video-camera"></i> BoxOffice</a></h2>-->
+<!--        </div>-->
+<!--        {% if user.is_authenticated %}-->
+<!--        <div class="col-lg-3 col-4">-->
+<!--                <div class="dropdown">-->
+<!--                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                          <i class="fa fa-user" aria-hidden="true"></i> {{user.first_name }}-->
+<!--                        </button>-->
+<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                            {% if user.cinema.role == 'cinema_manager' %}-->
+<!--                            <a class="dropdown-item" href="{% url 'dashboard' %}"> <i class="fa fa-edit"></i> Dashboard</a>-->
+<!--                            {% else %}-->
+<!--                            <a class="dropdown-item" href="{% url 'profile' %}"> <i class="fa fa-edit"></i> Profile</a>-->
+<!--                            <a class="dropdown-item" href="{% url 'bookings' %}"> <i class="fa fa-ticket"></i> Bookings</a>-->
+<!--                            {% endif %}-->
+<!--                            <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>-->
+<!--                        </div>-->
+<!--                </div>-->
+<!--        </div>-->
+<!--        {%  else  %}-->
+<!--        <div class="col-lg-3 col-12 mt-2">-->
+<!--            <div class="row no-gutters">-->
+<!--                <div class="col mr-1">-->
+<!--                    <a class="btn btn-danger d-block" href="{% url 'register' %}" role="button"> Sign Up</a>-->
+<!--                    <br>-->
+<!--                    <a class="btn btn-danger d-block" href="{% url 'login' %}" role="button"> Sign In </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--    </nav>-->
+
+<!--    python block content python-->
+<!--    python endblock python-->
+
+
+<!--&lt;!&ndash;     Optional JavaScript&ndash;&gt;-->
+<!--&lt;!&ndash;     jQuery first, then Popper.js, then Bootstrap JS&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>&ndash;&gt;-->
+
+
+<!--    python block JQuery python-->
+<!--    python endblock python-->
+
+<!--</body>-->
+<!--</html>-->

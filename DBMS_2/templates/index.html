@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-<title>BoxOffice | Home</title>
-{% endblock %}
+
 
 {% block content %}
 
-<div class="container">
+<div class="uk-light wrap uk-background-norepeat uk-background-cover uk-background-center-center uk-cover-container" style="background: #081421;"
+    <section id="about" class="uk-section uk-section-default" style="background: #081421;">
+        <div class = "uk-margin-auto" style="text-align: center;"><h1>Now Showcasing</h1></div>
+
+
+
+<!-- <div class="container">
     <div class="row mb-5">
         <div class="col-12">
             <div class="row">
@@ -15,15 +19,17 @@
                     <h1>Now Showcasing</h1>
                 </div>
             </div>
-            <div class="row">
-
+            <div class="row"> -->
                 {% for movie in mov %}
-                <div class="col-12 col-md-6 col-lg-4 mb-5">
-                    <a href="/movies/{{movie.pk}}">
-                        <div class="card shadow" style="width: 18rem; margin:0px auto;">
+                <div data-uk-scrollspy-class="uk-animation-slide-left-medium"> 
+                    <div class="uk-card uk-card-body">
+                        <a href="/movies/{{movie.pk}}">
+                        <h3 class="uk-card-title">{{ movie.movie_name }}</h3></a>
+                    
+                        <div class="uk-card" style="width: 18rem; margin:0px auto;">
                             <img src="{{ movie.movie_poster.url }}" class="card-img-top" height="380px">
                             <div class="card-body">
-                                <h4 class="card-title text-center">{{ movie.movie_name }}</h4>
+                            
                             </div>
                         </div>
                     </a>

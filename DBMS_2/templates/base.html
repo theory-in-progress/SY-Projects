@@ -1,159 +1,69 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Movie Booker</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
-</style>
-
-
-<body>
-<div class="w3-top">
-    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
-
-    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-
-    <a href={% url 'index' %} class="w3-bar-item w3-button w3-padding-large w3-white">BoxOffice</a>
-
-    {% if user.is_authenticated %}
-<!--        <button class="w3-bar-item w3-button w3-padding-large w3-white">-->
-<!--            <div class="w3-bar-item w3-button w3-padding-large w3-white">-->
-                <button class="w3-button w3-black w3-padding-large w3-large w3-right">
-                  <i class="fa fa-user" aria-hidden="true"></i> {{user.first_name }}
-                </button>
-<!--            <div class="w3-bar-item w3-button w3-padding-large w3-white">-->
-                {% if user.cinema.role == 'cinema_manager' %}
-                    <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'dashboard' %}"> <i class="fa fa-edit"></i> Dashboard</a>
-                {% else %}
-                    <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'profile' %}"> <i class="fa fa-edit"></i> Profile</a>
-                    <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'bookings' %}"> <i class="fa fa-ticket"></i> Bookings</a>
-                {% endif %}
-            <a class="w3-bar-item w3-button w3-padding-large w3-white" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
-                        </div>
+        <link rel="stylesheet" href="css/other.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.4/dist/css/uikit.min.css" />
+        <link rel="stylesheet" href="css/github.css">
+        <link rel="stylesheet" href="css/other.css">
+    <script async src='/cdn-cgi/challenge-platform/h/b/scripts/invisible.js'></script></head>
+    <body>
+        <div class="uk-light wrap uk-background-norepeat uk-background-cover uk-background-center-center uk-cover-container" style="background: #081421;">
+            <div class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-position-z-index uk-position-relative" data-uk-height-viewport="min-height: 400">
+                <!-- NAV -->
+                <div class="uk-position-top">
+                    <div class="uk-container uk-container-small">
+                        <nav class="uk-navbar-container uk-navbar-transparent" data-uk-navbar>
+                            <div class="uk-navbar-left">
+                                <div class="uk-navbar-item" uk-scrollspy="cls: uk-animation-slide-top; repeat: true">
+                                    <li class="uk-visible@s"><a href={% url 'index' %} ><button class="uk-button uk-button-text">BoxOffice</button></a></li>
+                                </div>
+                            </div>
+                            <div class="uk-navbar-right" uk-scrollspy="cls: uk-animation-slide-top; repeat: true">
+                                <ul class="uk-navbar-nav">
+                                    {% if user.is_authenticated %}
+                                    <li class="uk-visible@s"><button class="uk-button uk-button-text">{{user.first_name}}</button></a></li>
+                                        {% if user.cinema.role == 'cinema_manager' %}
+                                            <li class="uk-visible@s"><a href="{% url 'dashboard' %}"><button class="uk-button uk-button-text">Dashboard</button></a></li>
+                                        {% else %}
+                                            <li class="uk-visible@s"><a href="{% url 'profile' %}"> <button class="uk-button uk-button-text">Profile</button></a></li>
+                                            <li class="uk-visible@s"><a href="{% url 'bookings' %}"> <button class="uk-button uk-button-text">Bookings</button></a></li>
+                                        {% endif %}
+                                            <li class="uk-visible@s"><a href="{% url 'logout' %}"> <button class="uk-button uk-button-text">Logout</button></a></li>
+                                    {% else %}
+                                    <li class="uk-visible@s"><a href="{% url 'register' %}"> <button class="uk-button uk-button-text">Sign Up</button></a></li>
+                                    <li class="uk-visible@s"><a href="{% url 'login' %}"> <button class="uk-button uk-button-text">Sign In</button></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
-        </div>
-    {%  else  %}
-        <div class="w3-top-right">
-            <div class="w3-bar w3-red w3-card w3-right w3-large">
-                <div class="w3-bar w3-red w3-card w3-right w3-large">
-
-                    <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-padding-large w3-white">Sign Up</a>
-
-                    <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large w3-white">Sign In</a>
-
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-
-
-
-    </div>
-
-<header class="w3-container w3-red w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo"></h1>
-</header>
-
-<div class="w3-row-padding w3-padding-20 w3-container">
-  <div class="w3-content">
-<!--    <div class="w3-twothird">-->
-
-
+                <!-- /NAV -->
+                <!-- TEXT -->
+                <!-- <div class="uk-container uk-container-small uk-flex-auto uk-text-center" data-uk-scrollspy="target: > .animate; cls: uk-animation-slide-bottom-small uk-invisible; delay: 300">
+                    <h1 class="uk-heading-primary animate uk-invisible" style="font-weight: 1000;"><a href="{% url 'index' %}"><button class="uk-button uk-button-text">Sign in to Book Your Tickets Now!</button></h1>
+                    <div class="uk-position-large uk-position-bottom-center uk-margin-xlarge-bottom">
+                        <div class="icon-scroll" uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true; delay: 800"></div>        
+                    </div>
+                </div> -->
+                <!-- /TEXT -->
     {% block content %}
     {% endblock %}
 
 
     {% block JQuery %}
     {% endblock %}
-
-    <div class="w3-third w3-center">
-<!--    </div>-->
-  </div>
-</div>
-
+            </div>
+        </div>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/uikit@3.2.4/dist/js/uikit.min.js"></script>
+        <script src="js/icons.js"></script>
+        <script src="js/github.js"></script>
+	<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d30dbbff977f45718b705c2654940500"}'></script>
+	<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6b6cfa74d8770edc',m:'DYYvPK_9afqNyScERgez5vV.9xwj_osNQpQFb5Nhpbg-1638368658-0-AQ7fH661oN+qb89Z9P1zQ3+QMaLefhm5qUAoAJ+1rn3WIkwl631GKrLnLGuHfW0DEaw8RYPIS4Q9NUnn4JSHCFHBkv6FVeLhkiv7dLB7nnN2hE0bLDiNiXvQdK205VYPWA==',s:[0x27256cef4a,0x8911489bee],u:'/cdn-cgi/challenge-platform/h/b'}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v64f9daad31f64f81be21cbef6184a5e31634941392597" integrity="sha512-gV/bogrUTVP2N3IzTDKzgP0Js1gg4fbwtYB6ftgLbKQu/V8yH2+lrKCfKHelh4SO3DPzKj4/glTO+tNJGDnb0A==" data-cf-beacon='{"rayId":"6b6cfa74d8770edc","version":"2021.11.0","r":1,"token":"cbcedd05bbbc47dc975af2a01fd98fa7","si":100}' crossorigin="anonymous"></script>
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-
-
-<!--{% load static %}-->
-<!--<!doctype html>-->
-<!--<html lang="en">-->
-<!--  <head>-->
-<!--    {% block title%}{% endblock %}-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-<!--    {% block style %}{% endblock %}-->
-
-<!--</head>-->
-<!--  <body align="center">-->
-
-<!--    <nav class="navbar sticky-top" style="background-color: #0000006b">-->
-<!--        <div class="col-lg-3 col-md-4 col-8">-->
-<!--            <h2 class="text-white"> <a role="button" href={% url 'index' %} style="text-decoration: none; color: white;" ><i class="fa fa-video-camera"></i> BoxOffice</a></h2>-->
-<!--        </div>-->
-<!--        {% if user.is_authenticated %}-->
-<!--        <div class="col-lg-3 col-4">-->
-<!--                <div class="dropdown">-->
-<!--                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                          <i class="fa fa-user" aria-hidden="true"></i> {{user.first_name }}-->
-<!--                        </button>-->
-<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--                            {% if user.cinema.role == 'cinema_manager' %}-->
-<!--                            <a class="dropdown-item" href="{% url 'dashboard' %}"> <i class="fa fa-edit"></i> Dashboard</a>-->
-<!--                            {% else %}-->
-<!--                            <a class="dropdown-item" href="{% url 'profile' %}"> <i class="fa fa-edit"></i> Profile</a>-->
-<!--                            <a class="dropdown-item" href="{% url 'bookings' %}"> <i class="fa fa-ticket"></i> Bookings</a>-->
-<!--                            {% endif %}-->
-<!--                            <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>-->
-<!--                        </div>-->
-<!--                </div>-->
-<!--        </div>-->
-<!--        {%  else  %}-->
-<!--        <div class="col-lg-3 col-12 mt-2">-->
-<!--            <div class="row no-gutters">-->
-<!--                <div class="col mr-1">-->
-<!--                    <a class="btn btn-danger d-block" href="{% url 'register' %}" role="button"> Sign Up</a>-->
-<!--                    <br>-->
-<!--                    <a class="btn btn-danger d-block" href="{% url 'login' %}" role="button"> Sign In </a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        {% endif %}-->
-<!--    </nav>-->
-
-<!--    python block content python-->
-<!--    python endblock python-->
-
-
-<!--&lt;!&ndash;     Optional JavaScript&ndash;&gt;-->
-<!--&lt;!&ndash;     jQuery first, then Popper.js, then Bootstrap JS&ndash;&gt;-->
-<!--&lt;!&ndash;    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>&ndash;&gt;-->
-
-
-<!--    python block JQuery python-->
-<!--    python endblock python-->
-
-<!--</body>-->
-<!--</html>-->

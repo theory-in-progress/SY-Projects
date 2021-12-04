@@ -11,7 +11,7 @@ int main()
             miss++;
             continue;
         }
-        else if(s2==-1){
+        if(s2==-1){
             if(s3==arr[i]){
                 hit++;
                 continue;
@@ -21,7 +21,7 @@ int main()
             miss++;
             continue;
         }
-        else if(s1==-1){
+        if(s1==-1){
             if(s3==arr[i]){
                 hit++;
                 continue;
@@ -39,7 +39,7 @@ int main()
             miss++;
             continue;
         }
-        else if(s0==-1){
+        if(s0==-1){
             if(s3==arr[i]){
                 hit++;
                 continue;
@@ -66,18 +66,18 @@ int main()
             miss++;
             continue;
         }
-        else if(arr[i]==s3){
+        if(arr[i]==s3){
             hit++;
             continue;
         }
-        else if(arr[i]==s2){
+        if(arr[i]==s2){
             int temp=s3;
             s3=s2;
             s2=temp;
             hit++;
             continue;
         }
-        else if(arr[i]==s1){
+        if(arr[i]==s1){
             int temp=s3;
             s3=s1;
             s1=s2;
@@ -85,7 +85,7 @@ int main()
             hit++;
             continue;
         }
-        else if(arr[i]==s0){
+        if(arr[i]==s0){
             int temp=s3;
             s3=s0;
             s0=s1;

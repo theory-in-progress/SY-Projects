@@ -25,11 +25,11 @@
                             <div class="uk-navbar-right" uk-scrollspy="cls: uk-animation-slide-top; repeat: true">
                                 <ul class="uk-navbar-nav">
                                     {% if user.is_authenticated %}
-                                    <li class="uk-visible@s"><button class="uk-button uk-button-text">{{user.first_name}}</button></a></li>
+                                    <!-- <li class="uk-visible@s"><button class="uk-button uk-button-text">{{user.first_name}}</button></a></li> -->
                                         {% if user.cinema.role == 'cinema_manager' %}
                                             <li class="uk-visible@s"><a href="{% url 'dashboard' %}"><button class="uk-button uk-button-text">Dashboard</button></a></li>
                                         {% else %}
-                                            <li class="uk-visible@s"><a href="{% url 'profile' %}"> <button class="uk-button uk-button-text">Profile</button></a></li>
+                                            <li class="uk-visible@s"><a href="{% url 'profile' %}"> <button class="uk-button uk-button-text">{{user.first_name}}</button></a></li>
                                             <li class="uk-visible@s"><a href="{% url 'bookings' %}"> <button class="uk-button uk-button-text">Bookings</button></a></li>
                                         {% endif %}
                                             <li class="uk-visible@s"><a href="{% url 'logout' %}"> <button class="uk-button uk-button-text">Logout</button></a></li>
@@ -44,6 +44,7 @@
                 </div>
                 <!-- /NAV -->
                 <!-- TEXT -->
+                
                 <!-- <div class="uk-container uk-container-small uk-flex-auto uk-text-center" data-uk-scrollspy="target: > .animate; cls: uk-animation-slide-bottom-small uk-invisible; delay: 300">
                     <h1 class="uk-heading-primary animate uk-invisible" style="font-weight: 1000;"><a href="{% url 'index' %}"><button class="uk-button uk-button-text">Sign in to Book Your Tickets Now!</button></h1>
                     <div class="uk-position-large uk-position-bottom-center uk-margin-xlarge-bottom">

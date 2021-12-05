@@ -1,50 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-<title>BoxOffice</title>
-{% endblock %}
-
-{% block style %}
-<style>
-  body {
-    background: #2196f34a;
-  }
-
-  .title {
-    padding: 10px;
-    color: white;
-    text-decoration: none;
-  }
-
-  .card {
-    margin: 100px auto;
-    border-radius: 10px;
-    border: none;
-  }
-
-  .pass-h {
-    border-radius: 10px 10px 0px 0px;
-    background: linear-gradient(45deg, red, #ff4343);
-}
-
-  .info {
-    line-height: 40px;
-    background: #000;
-    color: white;
-    font-size: 20px;
-    border: solid 1px;
-    border-right: 0px;
-    border-radius: 50px 0px 0px 50px;
-  }
-
-  h3 span {
-    font-weight: 400;
-  }
-</style>
-{% endblock %}
-
-
 {% block content %}
 
 <div class="container-fluid">
@@ -59,10 +15,6 @@
         </div>
       </div>
       <div class="row mt-4 mb-4">
-        <div class="col-3">
-          <img class="img-fluid shadow-sm border"
-            src="https://www.ruletech.com.au/wp-content/uploads/2018/06/qr-code-rule-website.png">
-        </div>
         <div class="col-9">
           <div class="row">
             <div class="col-6">

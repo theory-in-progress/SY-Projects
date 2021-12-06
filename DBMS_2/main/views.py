@@ -33,7 +33,8 @@ def booked(request):
         user = request.user
         seat = request.POST.get('SeatNo.')
         show = request.POST['show']
-        book = Bookings(useat=seat, shows_id=show, user=user)
+        total_seats1 = request.POST['TotalSeats']
+        book = Bookings(useat=seat, shows_id=show, user=user, total_seats=total_seats1)
         # book_total = ticket(request='POST')
         book.save()
 

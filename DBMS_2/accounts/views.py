@@ -7,6 +7,8 @@ from django.db.models import Sum
 
 
 
+
+
 # Create your views here.
 def login(request):
     if request.method=='POST':

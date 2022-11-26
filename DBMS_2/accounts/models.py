@@ -45,7 +45,15 @@ class Bookings(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     shows = models.ForeignKey(Shows, on_delete=models.CASCADE)
     useat = models.CharField(max_length=100)
+    total_seats = models.IntegerField()
     
+    # def total_seats():
+    #     total_seats=0
+    #     for seat in Bookings.useat:
+    #         if seat=="#":
+    #             total_seats+=1
+    #     return total_seats
+
     @property
     def useat_as_list(self):
         return self.useat.split(',')

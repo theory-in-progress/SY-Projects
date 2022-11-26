@@ -1,109 +1,84 @@
-#include <stdio.h>
-int main()
-{
-    int arr[]={7,0,7,2,0,3,0,4,2,3,0,3,2},i=0;
-    int s0=-1,s1=-1,s2=-1,s3=-1;
+#include <iostream>
+#include<deque>
+#include <algorithm>
+#include <conio.h>
+#include <stdlib.h>
+using namespace std;
+void showdq(deque <int> g){
+    deque <int> :: iterator it;
+    for (it = g.begin(); it != g.end(); ++it) cout << '\t' << *it;
+    cout << '\n';
+}
+void HitMissCalculate(int capacity,int size,int arr[]){
+    deque<int> q(capacity);
+    int count=0;
     int miss=0,hit=0;
-    for(i;i<13;i++){
-        printf("%d\t%d\t%d\t%d\n",s0,s1,s2,s3);
-        if(s3==-1){
-            s3=arr[i];
+    deque<int>::iterator itr;
+    q.clear();
+    for(int i=0;i<size;i++){
+        itr = find(q.begin(),q.end(),arr[i]);
+        if(!(itr != q.end())){
             miss++;
-            continue;
-        }
-        else if(s2==-1){
-            if(s3==arr[i]){
-                hit++;
-                continue;
+            if(q.size() == capacity){
+                q.erase(q.begin());
+                q.push_back(arr[i]);
             }
-            s2=s3;
-            s3=arr[i];
-            miss++;
-            continue;
-        }
-        else if(s1==-1){
-            if(s3==arr[i]){
-                hit++;
-                continue;
-            }
-            if(s2==arr[i]){
-                hit++;
-                int temp=s3;
-                s3=s2;
-                s2=temp;
-                continue;
-            }
-            s1=s2;
-            s2=s3;
-            s3=arr[i];
-            miss++;
-            continue;
-        }
-        else if(s0==-1){
-            if(s3==arr[i]){
-                hit++;
-                continue;
-            }
-            if(s2==arr[i]){
-                hit++;
-                int temp=s3;
-                s3=s2;
-                s2=temp;
-                continue;
-            }
-            if(s1==arr[i]){
-                hit++;
-                int temp=s3;
-                s3=s1;
-                s1=s2;
-                s2=temp;
-                continue;
-            }
-            s0=s1;
-            s1=s2;
-            s2=s3;
-            s3=arr[i];
-            miss++;
-            continue;
-        }
-        else if(arr[i]==s3){
-            hit++;
-            continue;
-        }
-        else if(arr[i]==s2){
-            int temp=s3;
-            s3=s2;
-            s2=temp;
-            hit++;
-            continue;
-        }
-        else if(arr[i]==s1){
-            int temp=s3;
-            s3=s1;
-            s1=s2;
-            s2=temp;
-            hit++;
-            continue;
-        }
-        else if(arr[i]==s0){
-            int temp=s3;
-            s3=s0;
-            s0=s1;
-            s1=s2;
-            s2=temp;
-            hit++;
-            continue;
+            else q.push_back(arr[i]);
         }
         else{
-            int temp=s3;
-            s3=arr[i];
-            s0=s1;
-            s1=s2;
-            s2=temp;
-            miss++;
-            continue;
+            hit++;
+            q.erase(itr);
+            q.push_back(arr[i]);		
+        }
+        showdq(q);
+    }
+    cout<<"\nFor frame size "<<capacity<<" and having pages ";
+    for(int i=0;i<size;i++) cout<<arr[i]<<" ";
+    cout<<"\nNo. of page faults(miss): "<<miss;
+    cout<<"\nNo. of page hits are: "<<hit;
+    float hratio=hit*100/(hit+miss), mratio=miss*100/(hit+miss);
+    cout<<"\nHit %: "<<hratio;
+    cout<<"\nMiss %: "<<mratio;
+}
+int main()
+{   
+    int choice;
+    cout<<"********Least Reacently Used Implementation********";
+        int capacity,size;
+        cout<<"\nEnter Frame size: ";
+        cin>>capacity;
+        cout<<"\nEnter no. of pages: ";
+        cin>>size;
+        cout<<"\nEnter the pages seperated by spaces:\n";
+        int arr[size];
+        for(int i=0;i<size;i++) cin>>arr[i];
+        HitMissCalculate(capacity,size,arr);
+    while(1){
+        cout<<"\n1. Find hit/miss for the same pages with different framesize.\n2. Apply LRU for all different inputs.\n3. Exit.\nEnter your choice: ";
+        cin>>choice;
+        switch(choice){
+            case 1:
+                cout<<"\nEnter Frame size: ";
+                cin>>capacity;
+                HitMissCalculate(capacity,size,arr);
+                break;
+            case 2:
+                system("cls");
+                cout<<"********Least Reacently Used Implementation********";
+                cout<<"\nEnter Frame size: ";
+                cin>>capacity;
+                cout<<"\nEnter no. of pages: ";
+                cin>>size;\
+                cout<<"\nEnter the pages seperated by spaces:\n";
+                for(int i=0;i<size;i++) cin>>arr[i];
+                HitMissCalculate(capacity,size,arr);
+                break;
+            case 3:
+                cout<<"Exiting.....";
+                return 0;
+            default:
+            cout<<"Enter the valid choice."<<endl;
+            break;
         }
     }
-    printf("%d\t%d\t%d\t%d\nhit=%d\tmiss==%d",s0,s1,s2,s3,hit,miss);
-    return 0;
 }
